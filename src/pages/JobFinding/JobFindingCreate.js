@@ -14,6 +14,7 @@ const JobFindingCreate = ({navigation}) => {
         onAuthStateChanged(auth, (user) => {
             if (user) {
                 uid = user.uid;
+                console.log("user.username : ",user.username);
                 setData({...data, writerId: uid});
             } else {
                 navigation.push("Signin");
@@ -24,6 +25,8 @@ const JobFindingCreate = ({navigation}) => {
     // 포스트 데이터 설정
     const [data, setData] = useState({
         writerId: '',
+        writerName: '',
+        writerName: '',
         title: '',
         image: '',
         detail: '',
@@ -42,10 +45,11 @@ const JobFindingCreate = ({navigation}) => {
 
     const submitting = () => {
         console.log('submitting : ', data);
-        createDataWithId('jobFinding/', "" , data);
+        createDataWithId('jobFinding', "" , data);
+        navigation.push('JobFindingList');
     }
     return (
-        <FormScrollView buttonTitle={'작성'} buttonType="Square" onPress={submitting}>
+        <FormScrollView buttonTitle={'작성'} buttonType="Square" onPress={()=>submitting()}>
             <Input 
                 title="제목" 
                 placeholder="제목을 입력하세요"

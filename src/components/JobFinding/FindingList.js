@@ -1,8 +1,10 @@
-import { SafeAreaView, View, FlatList, StyleSheet, Text, StatusBar } from 'react-native';
-import React from "react";
+import { SafeAreaView, View, FlatList, StyleSheet, Text, StatusBar, Alert } from 'react-native';
+import React, { useEffect, useState } from "react";
 import theme from '../../theme';
 import {nanoid} from 'nanoid';
 import styled from "styled-components/native";
+import { onAuthStateChanged, getAuth } from 'firebase/auth';
+import { getData } from './../../firebase/database';
 
 const dataList = [
     {id : '1', title:'그래픽, 영상 편집을 전공한 인재입니다.', detail:'웹, 모바일 디자인, 그래픽 영상, 편집 디자인 등 경력 있습니다.', name : 'David'},
@@ -14,14 +16,36 @@ const dataList = [
 ];
 
   
-  const FindingList = () => {
+  const FindingList = ({navigation, item}) => {
+    const dataList = Object.values(item);
+
+      // 유저 정보 가져옴
+      const auth = getAuth();
+      const [userData, setUserData] = useState({
+        uid: "",
+        username: "",
+        imageUrl: "",
+      });
+    useEffect(() => {
+      onAuthStateChanged(auth, (user) => {
+        if (user) {
+          let uid = user.uid;
+          getData("users", uid, setUserData);
+        } else {
+          // User is signed out (로그아웃되면 자동으로 signin가도록 설정)
+          navigation.push("Signin");
+        }
+      });
+    }, []);
+
+
     return (
       <Styled.container>
         {dataList.map(item=> (
-          <Styled.listItem key={item.id}>
+          <Styled.listItem key={item.title}>
             <Styled.title>{item.title}</Styled.title>
             <Styled.detail>{item.detail}</Styled.detail>
-            <Styled.name>{item.name}</Styled.name>
+            {/* <Styled.name>{item.name}</Styled.name> */}
             <Styled.border></Styled.border>
           </Styled.listItem>
         ))}

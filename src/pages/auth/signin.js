@@ -45,6 +45,10 @@ const Signin = ({navigation}) => {
                 alert('비밀번호 형식이 올바르지 않습니다.') // for web
                 Alert.alert("비밀번호 형식이 올바르지 않습니다."); // for android & iphone
                 break;
+              case 'auth/wrong-password':
+                alert('비밀번호가 올바르지 않습니다.') // for web
+                Alert.alert("비밀번호가 올바르지 않습니다."); // for android & iphone
+                break;
               case 'auth/user-not-found':
                 alert('해당 사용자가 존재하지 않습니다. 이메일을 다시 확인해주세요.') // for web
                 Alert.alert('해당 사용자가 존재하지 않습니다. 이메일을 다시 확인해주세요.'); // for android & iphone

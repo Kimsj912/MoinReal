@@ -17,25 +17,32 @@ const Styled = {
     color: black;
   `,
 };
+const defaultList = [
+  //   { label: "맛집", value: "restaurant" },
+  { label: "카페", value: "cafe" },
+  { label: "생활꿀팁", value: "life" },
+];
 
-const InputDropBox = ({ label, category, setCategory }) => {
+const InputDropBox = ({
+  label,
+  category,
+  setCategory,
+  placeholder = {
+    label: "맛집",
+    value: "restaurant",
+  },
+  list = defaultList,
+}) => {
   return (
     <Styled.container>
       <Styled.label>{label}</Styled.label>
       <RNPickerSelect
-        placeholder={{
-          label: "맛집",
-          value: "restaurant",
-        }}
+        placeholder={placeholder}
         style={pickerSelectStyles}
         value={category}
         onValueChange={(value) => setCategory(value)}
         useNativeAndroidPickerStyle={true}
-        items={[
-        //   { label: "맛집", value: "restaurant" },
-          { label: "카페", value: "cafe" },
-          { label: "생활꿀팁", value: "life" },
-        ]}
+        items={list}
       />
     </Styled.container>
   );

@@ -14,14 +14,15 @@ const dataList = [
 ];
 
   
-  const OpeningList = () => {  
+  const OpeningList = ({item}) => {  
+    const dataList = Object.values(item);
     return (
       <Styled.container>
         {dataList.map(item=> (
           <Styled.listItem key={item.id}>
             <Styled.title>{item.title}</Styled.title>
             <Styled.detail>{item.detail}</Styled.detail>
-            <Styled.income>{item.income}</Styled.income>
+            <Styled.income>{item.salary}</Styled.income>
             <Styled.border></Styled.border>
           </Styled.listItem>
         ))}
