@@ -25,12 +25,25 @@ const SharingInfoDetail = ({ route, navigation }) => {
     writerId: "",
   });
 
+  const [writerData, setWriterData] = useState({
+    username: "",
+  })
   
   useEffect(() => {
     const postData = route.params;
     console.log(postData);
     setData({ ...postData });
   }, []);
+
+
+  useEffect(()=>{
+    getData("users",data.writerId, setWriterData);
+  }, [data]);
+
+  const [writername, setWriterName] = useState('');
+  useEffect(()=>{
+    setWriterName(writerData.username);
+  },[writerData]);
 
 
   // 유저 정보 가져옴
@@ -60,7 +73,7 @@ const SharingInfoDetail = ({ route, navigation }) => {
       </Styled.detailInfoBox>
       <DetailProfile
         source={userData.imageUrl}
-        username={data.writerId}
+        username={writername}
         sameUser={userData.uid === data.writerId}
       />
     </Styled.container>
