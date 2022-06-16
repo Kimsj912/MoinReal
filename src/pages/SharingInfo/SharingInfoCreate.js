@@ -47,7 +47,7 @@ const SharingInfoCreate = ({navigation}) => {
     const submitting = () => {
         console.log('submitting : ', data);
         createDataWithId('sharingInfo/', data.category, data);
-        navigation.push('SharingInfoList');
+        navigation.push('Tab');
     }
     return (
         <FormScrollView buttonTitle={'작성'} buttonType="Square" onPress={submitting}>

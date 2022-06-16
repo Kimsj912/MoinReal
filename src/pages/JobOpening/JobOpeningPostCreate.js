@@ -61,7 +61,7 @@ const JobOpeningPostCreate = ({ navigation }) => {
   const submitting = () => {
     console.log("submitting : ", data);
     createDataWithId("jobOpening", "", data);
-    navigation.push("JobOpeningList");
+    navigation.push("Tab");
   };
 
   return (

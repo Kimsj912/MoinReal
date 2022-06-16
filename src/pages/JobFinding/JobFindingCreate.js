@@ -46,7 +46,7 @@ const JobFindingCreate = ({navigation}) => {
     const submitting = () => {
         console.log('submitting : ', data);
         createDataWithId('jobFinding', "" , data);
-        navigation.push('JobFindingList');
+        navigation.push('Tab');
     }
     return (
         <FormScrollView buttonTitle={'작성'} buttonType="Square" onPress={()=>submitting()}>
